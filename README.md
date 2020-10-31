@@ -8,12 +8,12 @@ make
 ```
 
 ### Bit Writer (Encoder) - *lzwrite*
-Use:
+Run using:
 ```
 ./lzwrite <input file> <output file>
 ```
 #### How it works?
-The program reads in a binary or ASCII file. As an example, suppose the input file contains 4 bytes:
+The program reads in either a binary or ASCII file. As an example, suppose the input file contains 4 bytes:
 ```
 abc\n
 ```
@@ -25,7 +25,7 @@ And in binary:
 ```
 01100001 01100010 01100011 00001010
 ```
-For every byte (8-bits) in the file, the program writes it out as 9-bits, padding the front of each byte with one 0 bit:
+For every byte (8 bits) in the file, the program writes it out as 9 bits, padding the front of each byte with one 0 bit:
 ```
 001100001 001100010 001100011 000001010
 ```
@@ -45,3 +45,24 @@ The output file should contain the following in hexadecimal:
 ```
 30 98 8c 60 a0
 ```
+
+### Bit Reader (Decoder) - *lzread*
+Run using:
+```
+./lzread <input file> <output file>
+```
+#### How it works?
+The program reads in a binary file. Operating more or less identically to *lzwrite*, except this time the aim is to reverse the compression. Conceptually, the program reads in the file 9 bits at a time, printing out the 9-bit value in decimal, followed by a carriage return. In effect, the program is reading from an LZW compressed file, and handing off the value to the decompressor for processing.
+
+Using the ouput file from the previous *lzwrite* example:
+```
+30 98 8c 60 a0
+```
+Provided as input to *lzread*, will produce the following output file:
+```
+97
+98
+99
+10
+```
+Note: values can range from 0 to 511 with 9 bits.
