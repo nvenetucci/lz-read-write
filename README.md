@@ -8,7 +8,7 @@ $ make
 ```
 
 ### Bit Writer (Encoder) - *lzwrite*
-Run using:
+Usage:
 ```bash
 $ ./lzwrite <input file> <output file>
 ```
@@ -17,24 +17,24 @@ The program reads in either a binary or ASCII file. As an example, suppose the i
 ```
 abc\n
 ```
-In hexadecimal:
-```
-61 62 63 0a
-```
-And in binary:
-```
-01100001 01100010 01100011 00001010
+Which translates to:
+```bash
+61 62 63 0a # in hexadecimal
+
+# or
+
+01100001 01100010 01100011 00001010 # in binary
 ```
 For every byte (8 bits) in the file, the program writes it out as 9 bits, padding the front of each byte with one 0 bit:
-```
+```bash
 001100001 001100010 001100011 000001010
-```
-Since files can only be written in bytes, the program must account for realigning the bits:
-```
+
+# Since files can only be written in bytes (8 bits at a time), the program must account for realigning the bits
+
 00110000 10011000 10001100 01100000 1010
-```
-This may leave us with an unfilled byte, which the program will then need to pad (on the right) before writing to file:
-```
+
+# This may leave us with an unfilled byte, which the program will then need to pad (on the right) before writing to the file
+
 00110000 10011000 10001100 01100000 10100000
 ```
 We can't directly view the binary bits within a file, but we can use the program *od* to display its contents:
@@ -47,7 +47,7 @@ The output file should contain the following in hexadecimal:
 ```
 
 ### Bit Reader (Decoder) - *lzread*
-Run using:
+Usage:
 ```bash
 $ ./lzread <input file> <output file>
 ```
