@@ -29,11 +29,13 @@ For every byte (8 bits) in the file, the program writes it out as 9 bits, paddin
 ```bash
 001100001 001100010 001100011 000001010
 
-# Since files can only be written in bytes (8 bits at a time), the program must account for realigning the bits
+# Since files can only be written in bytes (8 bits at a time),
+# the program must account for realigning the bits
 
 00110000 10011000 10001100 01100000 1010
 
-# This may leave us with an unfilled byte, which the program will then need to pad (on the right) before writing to the file
+# This may leave us with an unfilled byte, which the program will
+# then need to pad (on the right) before writing to the file
 
 00110000 10011000 10001100 01100000 10100000
 ```
